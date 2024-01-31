@@ -1,5 +1,5 @@
 import React from "react";
-import { IconItem, IconView, PercentageCardType, PercentageDisplay, TextMessage, TextPercentage, TextPercentageView } from "./style";
+import { CardView, IconItem, IconView, PercentageCardType, PercentageDisplay, TextMessage, TextPercentage, TextPercentageView } from "./style";
 
 import { LargeButton } from "@components/LargeButton";
 
@@ -18,15 +18,12 @@ export function PercentageCard({ PercentageType, percentage, mensagem }: Props) 
                     <IconItem viewType={PercentageType} />
                 </IconView>
 
-                <TextPercentageView>
-                    <TextPercentage>{percentage}</TextPercentage>
-
+                <TextPercentage>{percentage}</TextPercentage>
+                <CardView>
                     <TextMessage>{mensagem}</TextMessage>
-                </TextPercentageView>
+                </CardView>
 
             </PercentageDisplay>
-
-            <LargeButton />
         </>
     )
 }

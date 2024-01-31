@@ -1,11 +1,33 @@
 import React from "react";
-import { ButtonMealView, Container, HeaderMain, LogoView } from "./style";
-import { StatusBar } from "react-native";
 import theme from "src/theme";
+import { ButtonMealView, Container, HeaderMain, LogoView, MealsText, SectionListView } from "./style";
+import { StatusBar, SectionList, View } from "react-native";
 import { PercentageCard } from "@components/PercentageCard";
 import { Logos } from "@components/Logos";
+import { LargeButton } from "@components/LargeButton";
 
 export function Home() {
+
+
+    const DATA = [
+        {
+            date: '22.04.2023',
+            properties: ['22:00', 'Burger Super Fatty - Onios, etc', 'GREEN'],
+        },
+        {
+            date: '22.04.2023',
+            properties: ['22:00', 'Burger Super Fatty - Onios, etc', 'GREEN'],
+        },
+        {
+            date: '22.04.2023',
+            properties: ['22:00', 'Burger Super Fatty - Onios, etc', 'GREEN'],
+        },
+        {
+            date: '22.04.2023',
+            properties: ['22:00', 'Burger Super Fatty - Onios, etc', 'GREEN'],
+        },
+    ];
+
     return (
         <>
             <StatusBar
@@ -19,8 +41,18 @@ export function Home() {
                 </LogoView>
 
                 <HeaderMain>
-                    <PercentageCard mensagem="Tkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk," percentage="97,10%" PercentageType="GREEN" />
+                    <PercentageCard mensagem="das refeições dentro da dieta" percentage="97,10%" PercentageType="GREEN" />
                 </HeaderMain>
+                <ButtonMealView>
+                    <MealsText> Refeições</MealsText>
+                    <LargeButton mensagem="Nova refeição" />
+                </ButtonMealView>
+                <SectionListView>
+                    <SectionList
+
+                    />
+                </SectionListView>
+
 
             </Container>
         </>

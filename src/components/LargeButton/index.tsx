@@ -1,11 +1,15 @@
 import React from "react";
-import { Container, Mensagem } from "./style";
+import { Container, Mensagem, PlusIcon } from "./style";
 
+type Props = {
+    mensagem: string;
+}
 
-export function LargeButton() {
+export function LargeButton({ mensagem }: Props) {
     return (
         <Container>
-            <Mensagem> Testando</Mensagem>
+            <PlusIcon size={18} weight="light" />
+            <Mensagem> {mensagem} </Mensagem>
         </Container>
     )
 }

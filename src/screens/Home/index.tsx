@@ -6,105 +6,54 @@ import { PercentageCard } from "@components/PercentageCard";
 import { Logos } from "@components/Logos";
 import { LargeButton } from "@components/LargeButton";
 import { SectionListComponent } from "@components/SectionListComponent";
-import { DateStamp } from "@components/SectionListComponent/style";
+import { DateStamp, inDietType } from "@components/SectionListComponent/style";
 
 export function Home() {
 
     const DATA = [
+
         {
             title: '20.04.2023',
             data: [
-                [
-                    '22:00',
-                    'Budsadsarger Super Fatty - Onios, etc',
-                    'GREEN'
-                ],
-                [
-                    '22:00',
-                    'Bdsdaurger Super Fatty - Onios, etc',
-                    'GREEN'
-                ],
-                [
-                    '22:00',
-                    'Burgedsdr Super Fatty - Onios, etc',
-                    'RED'
-                ],
-                [
-                    '22:00',
-                    'Burgsader Super Fatty - Onios, etc',
-                    'GREEN'
-                ],
+                {
+                    time: '22:00',
+                    description: 'Budssaadsarger Super Ftty - Onio, etc',
+                    inDiet: "GREEN" as inDietType
+                },
+                {
+                    time: '22:00',
+                    description: 'Budsadsarger Sfdsfr Fatty - Onios, etc',
+                    inDiet: 'RED' as inDietType
+                },
+                {
+                    time: '22:00',
+                    description: 'Budsadsarger Supdfser Fty - Onios, etc',
+                    inDiet: 'GREEN' as inDietType
+                },
             ]
         },
         {
-            title: '21.04.2023',
+            title: '20.04.2023',
             data: [
-                [
-                    '22:00',
-                    'Burger Onios, etc',
-                    'GREEN'
-                ],
-                [
-                    '22:00',
-                    'Onios, etc',
-                    'GREEN'
-                ],
-                [
-                    '22:00',
-                    'Fattsy - Onios, etc',
-                    'RED'
-                ],
-                [
-                    '22:00',
-                    'dFatty - Onios, esdtc',
-                    'GREEN'
-                ],
+                {
+                    time: '22:00',
+                    description: 'Budsadsdsdarger fdsSuper Ftty - Onio, etc',
+                    inDiet: "GREEN" as inDietType
+                },
+                {
+                    time: '22:00',
+                    description: 'Budsadsarger dsfSrds Fdsdsatty - Onios, etc',
+                    inDiet: 'RED' as inDietType
+                },
+                {
+                    time: '22:00',
+                    description: 'Budsadsargerdf Superdsadsad Ftasdsady - Onios, etc',
+                    inDiet: 'GREEN' as inDietType
+                },
             ]
-        },
-        {
-            title: '22.04.2023',
-            data: [
-                [
-                    '22:00',
-                    'Burger Superss Fatty - Onsdadios, etc',
-                    'GREEN'
-                ],
-                [
-                    '22:00',
-                    'Burger Supersddd Fattsdy - Onios, etc',
-                    'GREEN'
-                ],
-                [
-                    '22:00',
-                    'Burger Superfdsdd Fatty - Onios, etc',
-                    'RED'
-                ],
-                [
-                    '22:00',
-                    'Burger Superdd Fatty - Onsdaios, etc',
-                    'GREEN'
-                ],
-            ]
-        },
-    ];
+        }
+    ]
 
-    /*
-    {
-        title: '22.04.2023',
-        data: ['22:00', 'Burger Super Fatty - Onios, etc', 'GREEN'],
-    },
-    {
-        title: '22.04.2023',
-        data: ['22:00', 'Burger Super Fatty - Onios, etc', 'GREEN'],
-    },
-    {
-        dattitlee: '22.04.2023',
-        data: ['22:00', 'Burger Super Fatty - Onios, etc', 'GREEN'],
-    },
-    {
-        title: '22.04.2023',
-        data: ['22:00', 'Burger Super Fatty - Onios, etc', 'GREEN'],
-    }, */
 
     return (
         <>
@@ -128,12 +77,12 @@ export function Home() {
                 <SectionListView>
                     <SectionList
                         sections={DATA}
-                        keyExtractor={(item) => item[0] + item[1] + item[2]}
+                        keyExtractor={(item) => item[1]}
                         renderItem={({ item }) => (
                             <SectionListComponent
-                                time={item[0]}
-                                description={item[1]}
-                                inDiet={"RED"}
+                                time={item.time}
+                                description={item.description}
+                                inDiet={item.inDiet}
                             />
                         )}
                         renderSectionHeader={({ section: { title } }) => (

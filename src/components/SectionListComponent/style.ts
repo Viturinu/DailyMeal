@@ -23,6 +23,7 @@ export const TextView = styled.View`
     flex: 1;
     flex-direction: row;
     align-items: center;
+    max-width: 80%;
 `;
 export const Time = styled.Text`
     font-size: ${({ theme }) => theme.FONT_SIZE.XS}px;

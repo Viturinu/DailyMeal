@@ -16,7 +16,7 @@ export const PercentageDisplay = styled.View<Props>`
     background-color: ${({ theme, viewType }) => viewType === "GREEN" ? theme.COLOR.GREEN_MID : theme.COLOR.RED_MID};
 `;
 
-export const IconView = styled.View`
+export const IconView = styled.TouchableOpacity`
     height: 24px;
     align-items: flex-end;
     padding: 2px;

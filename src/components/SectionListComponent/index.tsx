@@ -1,4 +1,3 @@
-import { SafeAreaView, SectionList } from "react-native";
 import { Container, Description, IconView, TextView, Time, inDietType } from "./style";
 
 type Props = {

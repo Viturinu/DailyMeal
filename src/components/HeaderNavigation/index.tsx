@@ -1,21 +1,27 @@
 import React from "react";
-import { Container } from "./style";
+import { Container, HeaderType, HeaderView, TextMessage, TextPercentage } from "./style";
 import { StatusBar } from "react-native";
+import theme from "src/theme";
 
 type Props = {
-    statusBarColor: string
+    headerTypeFlag?: HeaderType;
+    percentage: string;
+    mensagem: string;
 }
 
-export function Header({ statusBarColor }: Props) {
+export function HeaderNavigation({ headerTypeFlag = "GREEN", percentage, mensagem }: Props) {
     return (
         <>
             <StatusBar
                 barStyle="dark-content"
-                backgroundColor={statusBarColor}
+                backgroundColor={headerTypeFlag === "GREEN" ? theme.COLOR.GREEN_MID : theme.COLOR.RED_MID}
                 translucent
             />
-            <Container>
-
+            <Container viewType="GREEN">
+                <TextPercentage>{percentage}</TextPercentage>
+                <HeaderView>
+                    <TextMessage>{mensagem}</TextMessage>
+                </HeaderView>
             </Container>
         </>
     )

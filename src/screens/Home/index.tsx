@@ -16,18 +16,18 @@ export function Home() {
             title: '20.04.2023',
             data: [
                 {
-                    time: '22:00',
-                    description: 'Budssaadsarger Super Ftty - Onio, etc',
+                    time: '22:00' as string,
+                    description: 'Budssa - Onio, etc' as string,
                     inDiet: "GREEN" as inDietType
                 },
                 {
                     time: '22:00',
-                    description: 'Budsadsarger Sfdsfr Fatty - Onios, etc',
+                    description: 'Budsadsargty - Onios, etc',
                     inDiet: 'RED' as inDietType
                 },
                 {
-                    time: '22:00',
-                    description: 'Budsadsarger Supdfser Fty - Onios, etc',
+                    time: '22:00' as string,
+                    description: 'Budsadsarger Supdfs, etc' as string,
                     inDiet: 'GREEN' as inDietType
                 },
             ]
@@ -36,18 +36,18 @@ export function Home() {
             title: '20.04.2023',
             data: [
                 {
-                    time: '22:00',
-                    description: 'Budsadsdsdarger fdsSuper Ftty - Onio, etc',
+                    time: '22:00 ' as string,
+                    description: 'Budsadsr Ftty - Onio, etc' as string,
                     inDiet: "GREEN" as inDietType
                 },
                 {
-                    time: '22:00',
-                    description: 'Budsadsarger dsfSrds Fdsdsatty - Onios, etc',
+                    time: '22:00' as string,
+                    description: 'Bunios, etc' as string,
                     inDiet: 'RED' as inDietType
                 },
                 {
-                    time: '22:00',
-                    description: 'Budsadsargerdf Superdsadsad Ftasdsady - Onios, etc',
+                    time: '22:00' as string,
+                    description: 'BudsadOnios, etc' as string,
                     inDiet: 'GREEN' as inDietType
                 },
             ]
@@ -68,7 +68,7 @@ export function Home() {
                 </LogoView>
 
                 <HeaderMain>
-                    <PercentageCard mensagem="das refeições dentro da dieta" percentage="97,10%" PercentageType="GREEN" />
+                    <PercentageCard mensagem="das refeições dentro da dieta" number="97,10%" CardType="GREEN" ButtonOn={true} sizeNumber={32} />
                 </HeaderMain>
                 <ButtonMealView>
                     <MealsText> Refeições</MealsText>
@@ -77,7 +77,7 @@ export function Home() {
                 <SectionListView>
                     <SectionList
                         sections={DATA}
-                        keyExtractor={(item) => item[1]}
+                        keyExtractor={(item) => item.description}
                         renderItem={({ item }) => (
                             <SectionListComponent
                                 time={item.time}
@@ -88,8 +88,7 @@ export function Home() {
                         renderSectionHeader={({ section: { title } }) => (
                             <DateStamp>{title}</DateStamp>
                         )}
-
-
+                        showsVerticalScrollIndicator={false}
                     />
                 </SectionListView>
 

@@ -1,29 +1,32 @@
 import React from "react";
 import { CardView, IconItem, IconView, PercentageCardType, PercentageDisplay, TextMessage, TextPercentage, TextPercentageView } from "./style";
 
-import { LargeButton } from "@components/LargeButton";
-
 type Props = {
-    PercentageType: PercentageCardType;
-    percentage: string;
+    CardType: PercentageCardType;
+    ButtonOn?: boolean;
+    number: string;
     mensagem: string;
+    sizeNumber: number;
 }
 
-export function PercentageCard({ PercentageType, percentage, mensagem }: Props) {
+export function PercentageCard({ CardType, number, mensagem, ButtonOn = false, sizeNumber }: Props) {
     return (
         <>
-            <PercentageDisplay viewType={PercentageType}>
-
+            <PercentageDisplay viewType={CardType}>
                 <IconView>
-                    <IconItem viewType={PercentageType} />
+                    {
+                        ButtonOn ?
+                            <IconItem viewType={CardType} />
+                            : null
+                    }
                 </IconView>
 
-                <TextPercentage>{percentage}</TextPercentage>
+                <TextPercentage numberSizeDef={sizeNumber} >{number}</TextPercentage>
                 <CardView>
                     <TextMessage>{mensagem}</TextMessage>
                 </CardView>
 
-            </PercentageDisplay>
+            </PercentageDisplay >
         </>
     )
 }

@@ -1,17 +1,25 @@
-import { Container, Description, IconView, TextView, Time, inDietType } from "./style";
+import { Container, Description, DescriptionView, IconView, Separator, SeparatorView, Time, TimeDescriptionView, TimeView, inDietType } from "./style";
+import { TouchableOpacityProps } from "react-native";
 
-type Props = {
+type Props = TouchableOpacityProps & {
     time: string,
     description: string,
     inDiet?: inDietType,
 }
-export function SectionListComponent({ time, description, inDiet = "GREEN" }: Props) {
+export function SectionListComponent({ time, description, inDiet = "GREEN", ...rest }: Props) {
     return (
-        <Container>
-            <TextView>
-                <Time>{time}</Time>
-                <Description>{description}</Description>
-            </TextView>
+        <Container {...rest}>
+            <TimeDescriptionView>
+                <TimeView>
+                    <Time>{time}</Time>
+                </TimeView>
+                <SeparatorView>
+                    <Separator>|</Separator>
+                </SeparatorView>
+                <DescriptionView>
+                    <Description>{description}</Description>
+                </DescriptionView>
+            </TimeDescriptionView>
             <IconView Icon={inDiet} />
         </Container>
     )

@@ -2,10 +2,14 @@ import styled, { css } from "styled-components/native";
 import { ArrowUpRight } from 'phosphor-react-native';
 import { View } from "react-native";
 
-export type PercentageCardType = "GREEN" | "RED";
+export type PercentageCardType = "GREEN" | "RED" | "GRAY";
 
 type Props = {
     viewType: PercentageCardType;
+}
+
+type PropsText = {
+    numberSizeDef: number
 }
 
 // View da porcentagem até o formulário
@@ -13,7 +17,8 @@ export const PercentageDisplay = styled.View<Props>`
     height: 102px;
     width: 100%;
     border-radius: 8px;
-    background-color: ${({ theme, viewType }) => viewType === "GREEN" ? theme.COLOR.GREEN_MID : theme.COLOR.RED_MID};
+    background-color: ${({ viewType }) => (viewType === "GREEN" ? "black" : "white")};
+
 `;
 
 export const IconView = styled.TouchableOpacity`
@@ -42,13 +47,14 @@ export const TextPercentageView = styled.View`
     border-color: black;
 `;
 
-export const TextPercentage = styled.Text`
+export const TextPercentage = styled.Text<PropsText>`
     ${({ theme }) => css`
         font-family: ${theme.FONT_FAMILY.BOLD};
-        font-size: ${theme.FONT_SIZE.XL}px;
         color: ${theme.COLOR.GRAY_700};
         align-self: center;
-    `};`;
+    `};
+        font-size: ${({ numberSizeDef }) => numberSizeDef}px;
+    `;
 
 export const TextMessage = styled.Text`
     ${({ theme }) => css`

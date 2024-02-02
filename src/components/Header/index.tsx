@@ -1,7 +1,8 @@
 import React from "react";
-import { Container, HeaderType, HeaderView, TextMessage, TextPercentage } from "./style";
+import { Container, HeaderType, TextMessage, TextPercentage, BackButtonButton, BackButtonIcon, BackButtonView } from "./style";
 import { StatusBar } from "react-native";
 import theme from "src/theme";
+
 
 type Props = {
     headerTypeFlag?: HeaderType;
@@ -9,7 +10,7 @@ type Props = {
     mensagem: string;
 }
 
-export function HeaderNavigation({ headerTypeFlag = "GREEN", percentage, mensagem }: Props) {
+export function Header({ headerTypeFlag = "GREEN", percentage, mensagem }: Props) {
     return (
         <>
             <StatusBar
@@ -18,10 +19,13 @@ export function HeaderNavigation({ headerTypeFlag = "GREEN", percentage, mensage
                 translucent
             />
             <Container viewType="GREEN">
+                <BackButtonView>
+                    <BackButtonButton>
+                        <BackButtonIcon viewType="GREEN" />
+                    </BackButtonButton>
+                </BackButtonView>
                 <TextPercentage>{percentage}</TextPercentage>
-                <HeaderView>
-                    <TextMessage>{mensagem}</TextMessage>
-                </HeaderView>
+                <TextMessage>{mensagem}</TextMessage>
             </Container>
         </>
     )

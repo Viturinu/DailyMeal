@@ -5,6 +5,8 @@ import { Home } from '@screens/Home';
 import { Nunito_400Regular, Nunito_700Bold, useFonts } from "@expo-google-fonts/nunito"
 import { Loading } from '@components/Loading';
 import { Statistics } from '@screens/Statistics';
+import { Form } from '@screens/Form';
+
 
 
 export default function App() {
@@ -14,7 +16,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       {
-        fontsLoaded ? <Statistics /> : <Loading />}
+        fontsLoaded ? <Form /> : <Loading />}
     </ThemeProvider>
   );
 }

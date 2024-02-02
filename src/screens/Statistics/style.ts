@@ -20,11 +20,18 @@ export const TitleText = styled.Text`
     margin-top: 24px;
 `;
 
-export const BodyCards = styled.View`
-    height: 309px;
+export const ContainerCards = styled.View`
+    height: 329px;
     width: 327px;
     align-items: center;
     margin-top: 20px;
     padding-left: 12px;
     padding-right: 12px;
+    justify-content: space-between;
+`;
+
+export const BodySegment = styled.View`
+flex-direction: row;
+justify-content: space-between;
+width: 100%;
 `;

@@ -5,7 +5,6 @@ export const Container = styled.TouchableOpacity`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 100%;
     height: 50px;
     border-radius: 6px;
     background-color: ${({ theme }) => theme.COLOR.GRAY_600};

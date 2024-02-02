@@ -5,7 +5,7 @@ type Props = {
     mensagem: string;
 }
 
-export function LargeButton({ mensagem }: Props) {
+export function Button({ mensagem }: Props) {
     return (
         <Container>
             <PlusIcon size={18} weight="light" />

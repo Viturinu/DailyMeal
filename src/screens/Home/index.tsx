@@ -4,9 +4,9 @@ import { ButtonMealView, Container, HeaderMain, LogoView, MealsText, SectionList
 import { StatusBar, SectionList, View } from "react-native";
 import { PercentageCard } from "@components/PercentageCard";
 import { Logos } from "@components/Logos";
-import { LargeButton } from "@components/LargeButton";
 import { SectionListComponent } from "@components/SectionListComponent";
 import { DateStamp, inDietType } from "@components/SectionListComponent/style";
+import { Button } from "@components/Button";
 
 export function Home() {
 
@@ -72,7 +72,7 @@ export function Home() {
                 </HeaderMain>
                 <ButtonMealView>
                     <MealsText> Refeições</MealsText>
-                    <LargeButton mensagem="Nova refeição" />
+                    <Button mensagem="Nova refeição" />
                 </ButtonMealView>
                 <SectionListView>
                     <SectionList

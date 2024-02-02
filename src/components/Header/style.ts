@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components/native";
+import { ArrowLeft } from "phosphor-react-native";
 
 export type HeaderType = "GREEN" | "RED";
 
@@ -15,15 +16,19 @@ export const Container = styled.SafeAreaView<Props>`
     background-color: ${({ theme, viewType }) => viewType === "GREEN" ? theme.COLOR.GREEN_MID : theme.COLOR.RED_MID};
 `;
 
-
-export const HeaderView = styled.View`
-    align-items: center;
-    justify-content: center;
-    padding-left: 2px;
-    padding-right: 2px;
-    max-height: 78px;
+export const BackButtonView = styled.View`
+    width: 100%;
+    flex-direction: row;
+    padding-left:12px;
+    border-color: black;
+    border-width: 1px;
 `;
+export const BackButtonButton = styled.TouchableOpacity``;
 
+export const BackButtonIcon = styled(ArrowLeft).attrs<Props>(({ theme, viewType }) => ({
+    size: 24,
+    color: viewType === "GREEN" ? theme.COLOR.GREEN_DARK : theme.COLOR.RED_DARK
+}))``;
 
 export const TextPercentage = styled.Text`
     ${({ theme }) => css`

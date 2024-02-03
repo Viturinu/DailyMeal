@@ -1,13 +1,17 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { Plus } from "phosphor-react-native"
 
-export type ButtonType = "SIM" | "NAO";
+type ButtonType = "SIM" | "NAO";
 
-type Props = {
+export type PropsType = {
     tipo: ButtonType;
 }
 
-export const Container = styled.TouchableOpacity`
+export type PropsStyle = {
+    isActive: boolean;
+}
+
+export const Container = styled.TouchableOpacity<PropsType & PropsStyle>`
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -15,9 +19,20 @@ export const Container = styled.TouchableOpacity`
     border-radius: 6px;
     background-color: ${({ theme }) => theme.COLOR.GRAY_300};
     margin-top: 8px;
+
+    ${({ theme, isActive, tipo }) => (isActive && tipo === "SIM") && css`
+        border: 1px solid ${theme.COLOR.GREEN_DARK};
+        background-color: ${theme.COLOR.GREEN_LIGHT};
+    `};
+
+    ${({ theme, isActive, tipo }) => (isActive && tipo === "NAO") && css`
+        border: 1px solid ${theme.COLOR.RED_DARK};
+        background-color: ${theme.COLOR.RED_LIGHT};
+    `};
+
 `;
 
-export const Ball = styled.View<Props>`
+export const Ball = styled.View<PropsType>`
     height: 8px;
     width: 8px;
     border-radius: 10px;

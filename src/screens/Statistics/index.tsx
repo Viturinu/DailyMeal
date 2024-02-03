@@ -1,12 +1,12 @@
 import React from "react"
 import { ContainerCards, BodySegment, BodyStatistics, Container, TitleText, TitleTextView } from "./style"
-import { Header } from "@components/Header"
+import { HeaderHome } from "@components/HeaderHome"
 import { PercentageCard } from "@components/PercentageCard"
 
 export function Statistics() {
     return (
         <Container>
-            <Header mensagem="das refeições dentro da dieta" percentage="33,36%" headerTypeFlag="GREEN" />
+            <HeaderHome mensagem="das refeições dentro da dieta" percentage="33,36%" headerTypeFlag="GREEN" />
             <BodyStatistics>
                 <TitleTextView>
                     <TitleText>Estatísticas gerais</TitleText>

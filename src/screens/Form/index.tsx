@@ -1,15 +1,18 @@
-import React from "react"
+import React, { useState } from "react"
 import { Container, DateInputView, DateTimeInputView, DescriptionInputView, DietInOptionNao, DietInOptionSim, DietInOptionsView, DietInView, FormContainer, FormView, NomeInputView, TimeInputView } from "./style"
-import { HeaderForm } from "@components/HeaderForm"
+import { Header } from "@components/Header"
 import { TitleText } from "@screens/Form/style"
 import { Input } from "@components/Input"
 import { ButtonOption } from "@components/ButtonOption"
 import { Button } from "@components/Button"
 
 export function Form() {
+
+    const [dietIn, setDietIn] = useState<boolean>(true)
+
     return (
         <Container>
-            <HeaderForm title="das refeições dentro da dieta" percentage="33,36%" headerTypeFlag="GRAY" />
+            <Header title="Nova refeição" percentage="33,36%" headerTypeFlag="GRAY" />
             <FormContainer>
                 <FormView>
                     <NomeInputView>
@@ -34,16 +37,16 @@ export function Form() {
                         <TitleText>Está dentro da dieta?</TitleText>
                         <DietInOptionsView>
                             <DietInOptionSim>
-                                <ButtonOption tipo="SIM" />
+                                <ButtonOption tipo="SIM" isActive={dietIn} onPress={() => dietIn ? null : setDietIn(true)} />
                             </DietInOptionSim>
                             <DietInOptionNao>
-                                <ButtonOption tipo="NAO" />
+                                <ButtonOption tipo="NAO" isActive={!dietIn} onPress={() => dietIn ? setDietIn(false) : null} />
                             </DietInOptionNao>
                         </DietInOptionsView>
                     </DietInView>
                 </FormView>
+                <Button mensagem="Cadastrar refeição" />
             </FormContainer>
-            <Button mensagem="Cadastrar refeição" />
         </Container>
     )
 }

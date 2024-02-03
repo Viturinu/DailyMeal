@@ -1,13 +1,12 @@
 import React from "react";
-import { Ball, ButtonType, Container, Opcao } from "./style";
+import { Ball, Container, Opcao, PropsType, PropsStyle } from "./style";
+import { TouchableOpacityProps } from "react-native";
 
-type Props = {
-    tipo: ButtonType;
-}
+type Props = PropsType & PropsStyle & TouchableOpacityProps;
 
-export function ButtonOption({ tipo }: Props) {
+export function ButtonOption({ tipo, isActive, ...rest }: Props) {
     return (
-        <Container>
+        <Container tipo={tipo} isActive={isActive} {...rest}>
             <Ball tipo={tipo} />
             <Opcao>
                 {

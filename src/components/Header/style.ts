@@ -1,48 +1,52 @@
 import styled, { css } from "styled-components/native";
 import { ArrowLeft } from "phosphor-react-native";
 
-export type HeaderType = "GREEN" | "RED";
+export type HeaderType = "GREEN" | "RED" | "GRAY";
 
 type Props = {
     viewType: HeaderType;
 }
 
 export const Container = styled.SafeAreaView<Props>`
-    height: 200px;
+    height: 100px;
     width: 100%;
     align-items: center;
     justify-content: center;
-    padding-bottom: 30px;
-    background-color: ${({ theme, viewType }) => viewType === "GREEN" ? theme.COLOR.GREEN_MID : theme.COLOR.RED_MID};
+    background-color: ${({ theme, viewType }) => viewType === "GREEN" ? theme.COLOR.GREEN_MID
+        : viewType === "RED" ? theme.COLOR.RED_MID
+            : theme.COLOR.GRAY_400};
 `;
 
-export const BackButtonView = styled.View`
-    width: 100%;
+export const TitleView = styled.View`
     flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
     padding-left:12px;
-    border-color: black;
-    border-width: 1px;
+    padding-right: 12px;
 `;
-export const BackButtonButton = styled.TouchableOpacity``;
+export const BackButtonButton = styled.TouchableOpacity`
+    height: 24px;
+    width: 24px;
+`;
 
 export const BackButtonIcon = styled(ArrowLeft).attrs<Props>(({ theme, viewType }) => ({
     size: 24,
-    color: viewType === "GREEN" ? theme.COLOR.GREEN_DARK : theme.COLOR.RED_DARK
+    color: viewType === "GREEN" ? theme.COLOR.GREEN_DARK
+        : viewType === "RED" ? theme.COLOR.RED_DARK
+            : theme.COLOR.GRAY_600
 }))``;
 
-export const TextPercentage = styled.Text`
+export const FillerView = styled.View`
+    height: 24px;
+    width: 24px;
+`;
+
+
+export const TextTitle = styled.Text`
     ${({ theme }) => css`
         font-family: ${theme.FONT_FAMILY.BOLD};
-        font-size: ${theme.FONT_SIZE.XXL}px;
+        font-size: ${theme.FONT_SIZE.MD}px;
         color: ${theme.COLOR.GRAY_700};
-        align-self: center;
-    `};`;
-
-export const TextMessage = styled.Text`
-    ${({ theme }) => css`
-        font-family: ${theme.FONT_FAMILY.REGULAR};
-        font-size: ${theme.FONT_SIZE.XS}px;
-        color: ${theme.COLOR.GRAY_700}
     `};
-    margin-top: 3px;
 `;

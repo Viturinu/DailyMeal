@@ -5,8 +5,7 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const FormContainer = styled.View`
-    width: 100%;
-    height: 100%;
+    flex: 1;
     border-radius: 20px;
     bottom: 20px;
     padding-left: 12px;
@@ -17,8 +16,6 @@ export const FormContainer = styled.View`
 export const FormView = styled.View`
     flex: 1;
     margin-top: 8px;
-    border-color: black;
-    border-width: 1px;
 `;
 
 export const NomeInputView = styled.View`

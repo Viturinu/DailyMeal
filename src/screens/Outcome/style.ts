@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components/native";
 
+export type Props = {
+    type: boolean;
+}
+
 export const Container = styled.SafeAreaView`
     flex: 1;
     padding-left: 32px;
@@ -18,17 +22,19 @@ export const TextView = styled.View`
     justify-content: center;
 `;
 
-export const TitleText = styled.Text`
-    ${({ theme }) => css`
+export const TitleText = styled.Text<Props>`
+    ${({ theme, type }) => css`
         font-size: ${theme.FONT_SIZE.XL}px;
         font-family: ${theme.FONT_FAMILY.BOLD};
-        color: ${theme.COLOR.GREEN_DARK};
-
+        color: ${type ? theme.COLOR.GREEN_DARK : theme.COLOR.RED_DARK};
     `};
 `;
 
 export const DescriptionTextView = styled.View`
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
 `;
 
 export const DescriptionText = styled.Text`
@@ -37,6 +43,8 @@ export const DescriptionText = styled.Text`
         font-family: ${theme.FONT_FAMILY.REGULAR};
         color: ${theme.COLOR.GRAY_700};
     `};
+    text-align: center;
+    margin-top: 4px;
 `;
 
 export const DescriptionBoldText = styled.Text`
@@ -54,4 +62,5 @@ export const ImageButtonView = styled.View`
 export const StatusImage = styled.Image`
     width: 224px;
     height: 288px;
+    margin-top: 30px;
 `;

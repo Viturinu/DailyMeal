@@ -17,7 +17,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       {
-        fontsLoaded ? <Outcome /> : <Loading />}
+        fontsLoaded ? <Outcome type={false} /> : <Loading />}
     </ThemeProvider>
   );
 }

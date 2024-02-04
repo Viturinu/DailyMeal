@@ -7,6 +7,7 @@ import { Loading } from '@components/Loading';
 import { Statistics } from '@screens/Statistics';
 import { Form } from '@screens/Form';
 import { Outcome } from '@screens/Outcome';
+import { MealDetails } from '@screens/MealDetails';
 
 
 
@@ -17,7 +18,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       {
-        fontsLoaded ? <Outcome type={false} /> : <Loading />}
+        fontsLoaded ? <MealDetails /> : <Loading />}
     </ThemeProvider>
   );
 }

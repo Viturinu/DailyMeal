@@ -6,7 +6,6 @@ import theme from "../../theme";
 
 type Props = {
     headerTypeFlag?: HeaderType;
-    percentage: string;
     title: string;
 }
 

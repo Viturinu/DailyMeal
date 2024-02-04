@@ -7,6 +7,7 @@ import { Logos } from "@components/Logos";
 import { SectionListComponent } from "@components/SectionListComponent";
 import { DateStamp, inDietType } from "@components/SectionListComponent/style";
 import { Button } from "@components/Button";
+import { Plus } from "phosphor-react-native";
 
 export function Home() {
 
@@ -72,7 +73,7 @@ export function Home() {
                 </HeaderMain>
                 <ButtonMealView>
                     <MealsText> Refeições</MealsText>
-                    <Button mensagem="Nova refeição" />
+                    <Button mensagem="Nova refeição" buttonColor="BLACK" iconActive={true} Icone={Plus} />
                 </ButtonMealView>
                 <SectionListView>
                     <SectionList

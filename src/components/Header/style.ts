@@ -12,8 +12,8 @@ export const Container = styled.SafeAreaView<Props>`
     width: 100%;
     align-items: center;
     justify-content: center;
-    background-color: ${({ theme, viewType }) => viewType === "GREEN" ? theme.COLOR.GREEN_MID
-        : viewType === "RED" ? theme.COLOR.RED_MID
+    background-color: ${({ theme, viewType }) => viewType === "GREEN" ? theme.COLOR.GREEN_LIGHT
+        : viewType === "RED" ? theme.COLOR.RED_LIGHT
             : theme.COLOR.GRAY_400};
 `;
 

@@ -14,8 +14,8 @@ export function Header({ headerTypeFlag = "GRAY", title }: Props) {
         <>
             <StatusBar
                 barStyle="dark-content"
-                backgroundColor={headerTypeFlag === "GREEN" ? theme.COLOR.GREEN_MID
-                    : headerTypeFlag === "RED" ? theme.COLOR.RED_MID
+                backgroundColor={headerTypeFlag === "GREEN" ? theme.COLOR.GREEN_LIGHT
+                    : headerTypeFlag === "RED" ? theme.COLOR.RED_LIGHT
                         : theme.COLOR.GRAY_400}
                 translucent
             />

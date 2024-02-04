@@ -3,7 +3,6 @@ import { Container, ContainerView, DescriptionBoldText, DescriptionText, Descrip
 import LogoSuccessful from "@assets/Successful.png"
 import LogoUnlucky from "@assets/Unlucky.png"
 import { Button } from "@components/Button"
-import { Plus } from "phosphor-react-native"
 
 export function Outcome({ type }: Props) {
     return (

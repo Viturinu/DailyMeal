@@ -7,17 +7,15 @@ export const Container = styled.SafeAreaView`
 export const MealContainerView = styled.View`
     flex: 1;
     border-radius: 20px;
-    bottom: 20px;
+    bottom: 15px;
     background-color: ${({ theme }) => theme.COLOR.GRAY_100};
+    padding-left: 24px;
+    padding-right: 24px;
 `;
 
 export const MealContainerContent = styled.View`
-    height: 205px;
+    flex: 1;
     margin-top: 30px;
-    padding-left: 24px;
-    padding-right: 24px;
-    border-color: black;
-    border-width: 1px;
 `;
 
 export const MealTextView = styled.View``;
@@ -58,4 +56,8 @@ ${({ theme }) => css`
         font-size: ${theme.FONT_SIZE.MD}px;
     `};
     margin-top: 5px;
+`;
+
+export const MealStatusView = styled.View`
+    margin-top: 18px;
 `;

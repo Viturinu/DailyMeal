@@ -12,7 +12,7 @@ export function Form() {
 
     return (
         <Container>
-            <Header title="Nova refeição" percentage="33,36%" headerTypeFlag="GRAY" />
+            <Header title="Nova refeição" headerTypeFlag="GRAY" />
             <FormContainer>
                 <FormView>
                     <NomeInputView>

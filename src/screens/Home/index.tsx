@@ -8,8 +8,15 @@ import { SectionListComponent } from "@components/SectionListComponent";
 import { DateStamp, inDietType } from "@components/SectionListComponent/style";
 import { Button } from "@components/Button";
 import { Plus } from "phosphor-react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export function Home() {
+
+    const navigation = useNavigation();
+
+    function handleNewMeal() {
+        navigation.navigate("form");
+    }
 
     const DATA = [
 
@@ -73,7 +80,7 @@ export function Home() {
                 </HeaderMain>
                 <ButtonMealView>
                     <MealsText> Refeições</MealsText>
-                    <Button mensagem="Nova refeição" buttonColor="BLACK" iconActive={true} Icone={Plus} />
+                    <Button mensagem="Nova refeição" buttonColor="BLACK" whatToDo={handleNewMeal} iconActive={true} Icone={Plus} />
                 </ButtonMealView>
                 <SectionListView>
                     <SectionList

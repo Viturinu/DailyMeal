@@ -3,8 +3,16 @@ import { Container, ContainerView, DescriptionBoldText, DescriptionText, Descrip
 import LogoSuccessful from "@assets/Successful.png"
 import LogoUnlucky from "@assets/Unlucky.png"
 import { Button } from "@components/Button"
+import { useNavigation } from "@react-navigation/native"
 
 export function Outcome({ type }: Props) {
+
+    const navigation = useNavigation();
+
+    function handleGoBackHome() {
+        navigation.navigate("home");
+    }
+
     return (
         <Container>
             {
@@ -21,7 +29,7 @@ export function Outcome({ type }: Props) {
                         </TextView>
                         <ImageButtonView>
                             <StatusImage source={LogoSuccessful} />
-                            <Button buttonColor="BLACK" mensagem="Ir para página inicial" />
+                            <Button buttonColor="BLACK" mensagem="Ir para página inicial" whatToDo={handleGoBackHome} iconActive={false} />
                         </ImageButtonView>
                     </ContainerView>
 
@@ -34,7 +42,7 @@ export function Outcome({ type }: Props) {
                         </TextView>
                         <ImageButtonView>
                             <StatusImage source={LogoUnlucky} />
-                            <Button buttonColor="BLACK" mensagem="Ir para página inicial" />
+                            <Button buttonColor="BLACK" mensagem="Ir para página inicial" whatToDo={handleGoBackHome} iconActive={false} />
                         </ImageButtonView>
                     </ContainerView>
             }

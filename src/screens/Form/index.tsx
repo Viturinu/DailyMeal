@@ -5,10 +5,17 @@ import { TitleText } from "@screens/Form/style"
 import { Input } from "@components/Input"
 import { ButtonOption } from "@components/ButtonOption"
 import { Button } from "@components/Button"
+import { useNavigation } from "@react-navigation/native"
 
 export function Form() {
 
     const [dietIn, setDietIn] = useState<boolean>(true)
+
+    const navigation = useNavigation();
+
+    function handleCreateNewMeal() {
+        navigation.navigate("outcome");
+    }
 
     return (
         <Container>
@@ -45,7 +52,7 @@ export function Form() {
                         </DietInOptionsView>
                     </DietInView>
                 </FormView>
-                <Button mensagem="Cadastrar refeição" />
+                <Button mensagem="Cadastrar refeição" buttonColor="BLACK" whatToDo={handleCreateNewMeal} iconActive={false} />
             </FormContainer>
         </Container>
     )

@@ -20,6 +20,20 @@ export function AppRoutes() {
                 name="form"
                 component={Form}
             />
+
+            <Screen
+                name="meal"
+                component={MealDetails}
+            />
+
+            <Screen
+                name="outcome"
+                component={Outcome}
+            />
+            <Screen
+                name="statistics"
+                component={Statistics}
+            />
         </Navigator>
     )
 }

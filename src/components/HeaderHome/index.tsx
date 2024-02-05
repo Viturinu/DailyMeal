@@ -2,6 +2,7 @@ import React from "react";
 import { Container, HeaderType, TextMessage, TextPercentage, BackButtonButton, BackButtonIcon, BackButtonView } from "./style";
 import { StatusBar } from "react-native";
 import theme from "src/theme";
+import { useNavigation } from "@react-navigation/native";
 
 
 type Props = {
@@ -11,6 +12,13 @@ type Props = {
 }
 
 export function HeaderHome({ headerTypeFlag = "GREEN", percentage, mensagem }: Props) {
+
+    const navigation = useNavigation();
+
+    function handleGoBack() {
+        navigation.goBack();
+    }
+
     return (
         <>
             <StatusBar
@@ -20,7 +28,7 @@ export function HeaderHome({ headerTypeFlag = "GREEN", percentage, mensagem }: P
             />
             <Container viewType="GREEN">
                 <BackButtonView>
-                    <BackButtonButton>
+                    <BackButtonButton onPress={handleGoBack}>
                         <BackButtonIcon viewType="GREEN" />
                     </BackButtonButton>
                 </BackButtonView>

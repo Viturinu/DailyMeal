@@ -2,6 +2,7 @@ import React from "react";
 import { Container, HeaderType, BackButtonButton, BackButtonIcon, TitleView, TextTitle, FillerView } from "./style";
 import { StatusBar } from "react-native";
 import theme from "../../theme";
+import { useNavigation } from "@react-navigation/native";
 
 
 type Props = {
@@ -10,6 +11,13 @@ type Props = {
 }
 
 export function Header({ headerTypeFlag = "GRAY", title }: Props) {
+
+    const navigation = useNavigation();
+
+    function handleGoBack() {
+        navigation.goBack();
+    }
+
     return (
         <>
             <StatusBar
@@ -21,7 +29,7 @@ export function Header({ headerTypeFlag = "GRAY", title }: Props) {
             />
             <Container viewType={headerTypeFlag}>
                 <TitleView>
-                    <BackButtonButton>
+                    <BackButtonButton onPress={handleGoBack}>
                         <BackButtonIcon viewType={headerTypeFlag} />
                     </BackButtonButton>
                     <TextTitle>{title}</TextTitle>

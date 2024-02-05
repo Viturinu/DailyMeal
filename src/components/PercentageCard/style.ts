@@ -21,8 +21,8 @@ export const PercentageDisplay = styled.View<Props & PropsSizeTypeCard>`
     width: ${({ sizeType }) => sizeType === "LARGE" ? "100%" : "48%"};
     border-radius: 8px;
     background-color: ${({ viewType, theme }) => (
-        viewType === "GREEN" ? theme.COLOR.GREEN_MID
-            : viewType === "RED" ? theme.COLOR.RED_MID
+        viewType === "GREEN" ? theme.COLOR.GREEN_LIGHT
+            : viewType === "RED" ? theme.COLOR.RED_LIGHT
                 : theme.COLOR.GRAY_200)};
 `;
 

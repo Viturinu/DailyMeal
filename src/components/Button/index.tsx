@@ -8,11 +8,12 @@ type Props = {
     buttonColor: colorStyle;
     Icone?: Icon;
     iconActive?: boolean;
+    whatToDo: () => void;
 }
 
-export function Button({ mensagem, buttonColor, iconActive = false, Icone }: Props) {
+export function Button({ mensagem, buttonColor, whatToDo, iconActive = false, Icone }: Props) {
     return (
-        <Container buttonColor={buttonColor}>
+        <Container buttonColor={buttonColor} onPress={whatToDo}>
             {
                 iconActive ? <Icone color={buttonColor === "BLACK" ? theme.COLOR.GRAY_100 : theme.COLOR.GRAY_700} size={18} weight="bold" />
                     : null

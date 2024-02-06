@@ -6,43 +6,48 @@ import { Input } from "@components/Input"
 import { ButtonOption } from "@components/ButtonOption"
 import { Button } from "@components/Button"
 import { useNavigation } from "@react-navigation/native"
-import DateTimePicker from '@react-native-community/datetimepicker'
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import { format } from 'date-fns';
+
+type tipoMode = "date" | "time";
 
 export function Form() {
 
     const [dietIn, setDietIn] = useState<boolean>(true);
 
-    const [dietDate, setDietDate] = useState<string>(""); //variavel para mostrar no TextInput
-    const [dietTime, setDietTime] = useState<string>(""); //variavel para mostrar no TextInput
+    const [dietDate, setDietDate] = useState<string>("");
+    const [dietTime, setDietTime] = useState<string>("");
 
     const [date, setDate] = useState(new Date());
-    const [mode, setMode] = useState("date");
-
-    const [show, setShow] = useState(false);
 
     const onChange = (event, selectedDate) => {
-        setDate(selectedDate)
-        setShow(false);
+        setDate(selectedDate);
+        setDietDate(format(selectedDate, 'dd/MM/yyyy'));
+        setDietTime(format(selectedDate, 'HH:mm'));
     }
 
-    const showMode = (currentShow) => {
-        setShow(true);
-        setMode(currentShow);
-    }
+    const showMode = (currentMode, tipo:tipoMode ) => {
+        DateTimePickerAndroid.open({
+          value: date,
+          onChange,
+          mode: currentMode,
+          is24Hour: true,
+        });
+      };
 
-    const showDatepicker = () => {
-        showMode('date');
-    };
-
-    const showTimepicker = () => {
-        showMode('time');
-    };
-
-    const navigation = useNavigation();
+      const showDatepicker = () => {
+        showMode('date', "date");
+      };
+    
+      const showTimepicker = () => {
+        showMode('time', "time");
+      };
 
     function handleCreateNewMeal() {
         navigation.navigate("outcome");
     }
+
+    const navigation = useNavigation();
 
     return (
         <Container>
@@ -60,43 +65,21 @@ export function Form() {
                     <DateTimeInputView>
                         <DateInputView>
                             <TitleText> Date</TitleText>
-                            <DatePressable onPress={() => showDatepicker()}>
+                            <DatePressable onPress={() => showMode("date", "date")}>
                                 <Input
                                     value={dietDate}
-                                    onChangeText={setDietDate}
                                     editable={false}
                                 />
                             </DatePressable>
-                            {
-                                show && (
-                                    <DateTimePicker
-                                        mode={mode}
-                                        display="spinner"
-                                        value={date}
-                                        onChange={onChange}
-                                    />
-                                )
-                            }
                         </DateInputView>
                         <TimeInputView>
                             <TitleText> Time</TitleText>
-                            <DatePressable onPress={() => showTimepicker()}>
+                            <DatePressable onPress={() => showMode("time", "time")}>
                                 <Input
                                     value={dietTime}
-                                    onChangeText={setDietTime}
                                     editable={false}
                                 />
                             </DatePressable>
-                            {
-                                show && (
-                                    <DateTimePicker
-                                        mode={mode}
-                                        display="clock"
-                                        value={date}
-                                        onChange={onChange}
-                                    />
-                                )
-                            }
                         </TimeInputView>
                     </DateTimeInputView>
                     <DietInView>

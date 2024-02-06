@@ -45,6 +45,10 @@ export const TimeInputView = styled.View`
    padding-left: 8px;
 `;
 
+export const DatePressable = styled.Pressable`
+    flex: 1;
+`;
+
 export const DietInView = styled.View`
     margin-top: 14px;
     width: 100%;

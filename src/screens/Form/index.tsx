@@ -6,37 +6,39 @@ import { Input } from "@components/Input"
 import { ButtonOption } from "@components/ButtonOption"
 import { Button } from "@components/Button"
 import { useNavigation } from "@react-navigation/native"
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { Platform, Pressable } from "react-native"
+import DateTimePicker from '@react-native-community/datetimepicker'
 
 export function Form() {
 
     const [dietIn, setDietIn] = useState<boolean>(true);
 
-    const [dietDate, setDietDate] = useState<string>("");
-    const [dietTime, setDietTime] = useState<string>("");
+    const [dietDate, setDietDate] = useState<string>(""); //variavel para mostrar no TextInput
+    const [dietTime, setDietTime] = useState<string>(""); //variavel para mostrar no TextInput
 
     const [date, setDate] = useState(new Date());
-    const [time, setTime] = useState(new Date());
+    const [mode, setMode] = useState("date");
 
-    const [showPickerDate, setShowPickerDate] = useState(false);
-    const [showPickerTime, setShowPickerTime] = useState(false);
+    const [show, setShow] = useState(false);
+
+    const onChange = (event, selectedDate) => {
+        setDate(selectedDate)
+        setShow(false);
+    }
+
+    const showMode = (currentShow) => {
+        setShow(true);
+        setMode(currentShow);
+    }
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const showTimepicker = () => {
+        showMode('time');
+    };
 
     const navigation = useNavigation();
-
-    const onChangeDate = (event, selectedDate) => {
-        const currentDate = selectedDate;
-        setShowPickerDate(false)
-        setDate(currentDate);
-        setDietDate(date.toDateString());
-    }
-
-    const onChangeTime = (event, selectedTime) => {
-        const currentDate = selectedTime;
-        setShowPickerTime(false);
-        setTime(currentDate);
-        setDietTime(date.toTimeString());
-    }
 
     function handleCreateNewMeal() {
         navigation.navigate("outcome");
@@ -58,7 +60,7 @@ export function Form() {
                     <DateTimeInputView>
                         <DateInputView>
                             <TitleText> Date</TitleText>
-                            <DatePressable onPress={() => setShowPickerDate(true)}>
+                            <DatePressable onPress={() => showDatepicker()}>
                                 <Input
                                     value={dietDate}
                                     onChangeText={setDietDate}
@@ -66,19 +68,19 @@ export function Form() {
                                 />
                             </DatePressable>
                             {
-                                showPickerDate && (
+                                show && (
                                     <DateTimePicker
-                                        mode="date"
+                                        mode={mode}
                                         display="spinner"
                                         value={date}
-                                        onChange={onChangeDate}
+                                        onChange={onChange}
                                     />
                                 )
                             }
                         </DateInputView>
                         <TimeInputView>
                             <TitleText> Time</TitleText>
-                            <DatePressable onPress={() => setShowPickerTime(true)}>
+                            <DatePressable onPress={() => showTimepicker()}>
                                 <Input
                                     value={dietTime}
                                     onChangeText={setDietTime}
@@ -86,12 +88,12 @@ export function Form() {
                                 />
                             </DatePressable>
                             {
-                                showPickerTime && (
+                                show && (
                                     <DateTimePicker
-                                        mode="time"
+                                        mode={mode}
                                         display="clock"
-                                        value={time}
-                                        onChange={onChangeTime}
+                                        value={date}
+                                        onChange={onChange}
                                     />
                                 )
                             }

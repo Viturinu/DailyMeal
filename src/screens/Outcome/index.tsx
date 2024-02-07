@@ -3,11 +3,18 @@ import { Container, ContainerView, DescriptionBoldText, DescriptionText, Descrip
 import LogoSuccessful from "@assets/Successful.png"
 import LogoUnlucky from "@assets/Unlucky.png"
 import { Button } from "@components/Button"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 
-export function Outcome({ type }: Props) {
+interface RouteParams {
+    type: boolean;
+}
+
+export function Outcome() {
 
     const navigation = useNavigation();
+    const route = useRoute();
+
+    const { type } = route.params as RouteParams;
 
     function handleGoBackHome() {
         navigation.navigate("home");

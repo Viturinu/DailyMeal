@@ -13,12 +13,12 @@ type tipoMode = "date" | "time";
 
 export function Form() {
 
-    const [dietIn, setDietIn] = useState<boolean>(true);
+    const [dietIn, setDietIn] = useState<boolean>(true); //definição se está ou não setado
 
     const [dietDate, setDietDate] = useState<string>("");
     const [dietTime, setDietTime] = useState<string>("");
 
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(new Date()); //data com hora e calendário
 
     const onChange = (event, selectedDate) => {
         setDate(selectedDate);
@@ -26,25 +26,22 @@ export function Form() {
         setDietTime(format(selectedDate, 'HH:mm'));
     }
 
-    const showMode = (currentMode, tipo:tipoMode ) => {
+    const showMode = (currentMode, tipo: tipoMode) => {
         DateTimePickerAndroid.open({
-          value: date,
-          onChange,
-          mode: currentMode,
-          is24Hour: true,
+            value: date,
+            onChange,
+            mode: currentMode,
+            is24Hour: true,
         });
-      };
-
-      const showDatepicker = () => {
-        showMode('date', "date");
-      };
-    
-      const showTimepicker = () => {
-        showMode('time', "time");
-      };
+    };
 
     function handleCreateNewMeal() {
-        navigation.navigate("outcome");
+        try {
+            navigation.navigate("outcome", { type: true });
+        } catch (error) {
+            console.log(error);
+            navigation.navigate("outcome", { type: false });
+        }
     }
 
     const navigation = useNavigation();
@@ -60,7 +57,9 @@ export function Form() {
                     </NomeInputView>
                     <DescriptionInputView>
                         <TitleText> Descrição</TitleText>
-                        <Input />
+                        <Input
+                            textAlignVertical="top"
+                        />
                     </DescriptionInputView>
                     <DateTimeInputView>
                         <DateInputView>

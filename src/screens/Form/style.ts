@@ -76,6 +76,7 @@ export const TitleText = styled.Text`
         font-family: ${theme.FONT_FAMILY.BOLD};
         color: ${theme.COLOR.GRAY_600};
         margin-bottom: 4px;
+
     `}
 `;
 

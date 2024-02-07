@@ -16,6 +16,7 @@ export function PercentageCard({ CardType, number, mensagem, ButtonOn = false, s
     const navigation = useNavigation();
 
     function handleMaximize() {
+        navigation.navigate("statistics");
     }
 
     return (

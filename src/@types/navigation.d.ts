@@ -3,8 +3,15 @@ export declare global {
         interface RootParamList {
             home: undefined;
             form: undefined;
-            meal: undefined;
-            outcome: undefined;
+            meal: {
+                dietIn: boolean;
+                Title: string;
+                Description: string;
+                Time: string;
+            };
+            outcome: {
+                type: boolean;
+            }
             statistics: undefined;
         }
     }

@@ -20,8 +20,6 @@ export const BackButtonView = styled.View`
     width: 100%;
     flex-direction: row;
     padding-left:12px;
-    border-color: black;
-    border-width: 1px;
 `;
 export const BackButtonButton = styled.TouchableOpacity``;
 

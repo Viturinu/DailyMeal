@@ -6,11 +6,17 @@ import { Outcome } from "@screens/Outcome";
 import { Statistics } from "@screens/Statistics";
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
+
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export function AppRoutes() {
     return (
-        <Navigator screenOptions={{ headerShown: false }}>
+        <Navigator
+            initialRouteName="home"
+            screenOptions={{
+                headerShown: false,
+                animation: "fade_from_bottom",
+            }}>
             <Screen
                 name="home"
                 component={Home}

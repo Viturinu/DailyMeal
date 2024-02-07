@@ -4,15 +4,24 @@ import { Header } from "@components/Header"
 import { MealStatus } from "@components/MealStatus"
 import { Button } from "@components/Button"
 import { PencilSimpleLine, Trash } from "phosphor-react-native"
+import { useRoute } from "@react-navigation/native"
 
-type Props = {
+interface RouteParams {
     dietIn: boolean;
     Title: string;
     Description: string;
     Time: string;
 }
 
-export function MealDetails({ dietIn, Title, Description, Time }: Props) {
+export function MealDetails() {
+
+    const route = useRoute();
+
+    const { dietIn } = route.params as RouteParams;
+    const { Title } = route.params as RouteParams;
+    const { Description } = route.params as RouteParams;
+    const { Time } = route.params as RouteParams;
+
     return (
         <Container>
             {
@@ -39,8 +48,8 @@ export function MealDetails({ dietIn, Title, Description, Time }: Props) {
 
                     </MealStatusView>
                 </MealContainerContent>
-                <Button buttonColor="BLACK" mensagem="Editar refeição" iconActive={true} Icone={PencilSimpleLine} />
-                <Button buttonColor="WHITE" mensagem="Excluir refeição" iconActive={true} Icone={Trash} />
+                <Button buttonColor="BLACK" mensagem="Editar refeição" iconActive={true} Icone={PencilSimpleLine} whatToDo={() => null} />
+                <Button buttonColor="WHITE" mensagem="Excluir refeição" iconActive={true} Icone={Trash} whatToDo={() => null} />
             </MealContainerView>
         </Container>
     )

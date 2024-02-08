@@ -67,10 +67,9 @@ export function Form() {
                 return
             }
             addMealByDate({ name, description, date, dietIn });
-            navigation.navigate("outcome", { type: true });
+            navigation.navigate("outcome", { type: dietIn });
         } catch (error) {
             console.log(error);
-            navigation.navigate("outcome", { type: false });
         } //nao vou colocar finally pra evitar erros de estados por já ter saido da screen
     }
 
@@ -125,10 +124,10 @@ export function Form() {
                         <TitleText>Está dentro da dieta?</TitleText>
                         <DietInOptionsView>
                             <DietInOptionSim>
-                                <ButtonOption tipo="SIM" isActive={dietIn} onPress={() => dietIn ? setDietIn(false) : setDietIn(true)} />
+                                <ButtonOption tipo="SIM" isActive={dietIn} onPress={() => !dietIn && setDietIn(true)} />
                             </DietInOptionSim>
                             <DietInOptionNao>
-                                <ButtonOption tipo="NAO" isActive={!dietIn} onPress={() => dietIn ? setDietIn(false) : setDietIn(true)} />
+                                <ButtonOption tipo="NAO" isActive={!dietIn} onPress={() => dietIn && setDietIn(false)} />
                             </DietInOptionNao>
                         </DietInOptionsView>
                     </DietInView>

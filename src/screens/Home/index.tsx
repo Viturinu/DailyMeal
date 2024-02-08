@@ -9,6 +9,7 @@ import { DateStamp, inDietType } from "@components/SectionListComponent/style";
 import { Button } from "@components/Button";
 import { Plus } from "phosphor-react-native";
 import { useNavigation } from "@react-navigation/native";
+import { getAllMeals } from "@storage/mealItem/getAllMeals";
 
 export function Home() {
 
@@ -17,6 +18,8 @@ export function Home() {
     function handleNewMeal() {
         navigation.navigate("form");
     }
+    //DATA TREATMENT
+    const allMeals = getAllMeals();
 
     const DATA = [
 
@@ -25,7 +28,7 @@ export function Home() {
             data: [
                 {
                     time: '22:00' as string,
-                    description: 'Budssa - Onio, etc' as string,
+                    description: 'Budss - Oni, etc' as string,
                     inDiet: "GREEN" as inDietType
                 },
                 {

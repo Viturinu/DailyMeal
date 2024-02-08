@@ -10,6 +10,7 @@ export const BodyStatistics = styled.View`
     border-radius: 20px;
     bottom: 55px;
     background-color: ${({ theme }) => theme.COLOR.GRAY_100};
+    align-items: center;
 `;
 export const TitleTextView = styled.View`
     align-items: center;

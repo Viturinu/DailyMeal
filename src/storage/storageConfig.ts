@@ -1,3 +1,8 @@
-const MEAL_ITEM = "@meal-date";
+type MealDTO = {
+    name: string;
+    description: string;
+    date: Date;
+    dietIn: boolean;
+}
 
-export { MEAL_ITEM };
+export { MealDTO };

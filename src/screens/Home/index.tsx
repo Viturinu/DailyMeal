@@ -12,11 +12,16 @@ import { useNavigation } from "@react-navigation/native";
 import { getAllMeals } from "@storage/mealItem/getAllMeals";
 import { EmptyListComponent } from "@components/EmptyListComponent";
 import { format } from "date-fns";
-import { MealDTO } from "@storage/storageConfig";
+
+interface MealDisplay {
+    name: string;
+    description: string;
+    dietIn: boolean;
+}
 
 export function Home() {
 
-    const [mappedArrayDone, setMappedArrayDone] = useState<{ [title: string]: { time: string; description: string; inDiet: boolean }[] }[]>([]);
+    const [mappedArrayDone, setMappedArrayDone] = useState<{ [index: string]: MealDisplay[] }>({});
 
     const navigation = useNavigation();
 
@@ -37,6 +42,7 @@ export function Home() {
                 inDiet: meal.dietIn
             }))
         }));
+        setMappedArrayDone(mappedArray);
         console.log("VEIO AQUI");
         mappedArray.map(item => console.log(JSON.stringify(item)));
     }

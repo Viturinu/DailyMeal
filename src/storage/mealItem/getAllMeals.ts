@@ -5,9 +5,9 @@ export async function getAllMeals() {
     try {
         const keys = await AsyncStorage.getAllKeys(); //pega chaves - datas
         const items = await AsyncStorage.multiGet(keys); //pega itens com as chaves
-        const allMealsAndDatesJSON: { [index: string]: MealDTO[] } = items ? JSON.parse(JSON.stringify(items)) : null;
+        //const allMealsAndDatesJSON: { [index: string]: MealDTO[] } = items ? JSON.parse(JSON.stringify(items)) : null;
         //const meals: string[] = storage ? JSON.parse(storage) : null;
-        return allMealsAndDatesJSON; //retorna o JSON
+        return items;
 
     } catch (error) {
         throw error

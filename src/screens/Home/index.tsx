@@ -19,9 +19,14 @@ interface MealDisplay {
     dietIn: boolean;
 }
 
+interface ObjectList {
+    title: string;
+    data: MealDisplay[];
+}
+
 export function Home() {
 
-    const [mappedArrayDone, setMappedArrayDone] = useState<{ [index: string]: MealDisplay[] }>({});
+    const [mappedArrayDone, setMappedArrayDone] = useState<{ [index: string]: MealDisplay[] }[]>([]);
 
     const navigation = useNavigation();
 
@@ -30,21 +35,37 @@ export function Home() {
     }
     //DATA TREATMENT
     async function fetchListData() {
-        const allMeals = await getAllMeals(); //Retorna JSON completo
-        //console.log("Get all meals no fetch list: " + allMeals)
-        console.log("VEIO AQUI ANTES");
+        try {
 
-        const mappedArray = Object.entries(allMeals).map(([date, meals]) => ({
-            title: date,
-            meals: meals.map(meal => ({
-                time: format(meal.date, 'HH:mm'),
-                description: meal.description,
-                inDiet: meal.dietIn
-            }))
-        }));
-        setMappedArrayDone(mappedArray);
-        console.log("VEIO AQUI");
-        mappedArray.map(item => console.log(JSON.stringify(item)));
+            const mappedArrayToInsert: ObjectList[] = []; //será inserido no estado mappedArrayDone
+
+            const allMeals = await getAllMeals(); //Retorna JSON completo
+            const array = Object.entries(allMeals); //array resgatado de forma completa (precisa ser trabalhado)
+
+            array.forEach((item) => {
+                const newItem: ObjectList = {
+                    title: item[0],
+                    data: item[1].forEach((itemData) => {
+                        const newItemData: MealDisplay = {
+                            name: itemData
+                            description
+                        }
+
+
+                    })
+                }
+                mappedArrayToInsert.push(newItem); //inserindo novo elemento na lista
+            })
+
+            console.log("Object.entries saida: " + array);
+
+
+
+            console.log("VEIO AQUI");
+        } catch (error) {
+            console.log("ERROR IS: " + error);
+        }
+
     }
 
     const DATA = [

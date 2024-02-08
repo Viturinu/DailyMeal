@@ -11,8 +11,6 @@ export const Container = styled(SafeAreaView)`
 export const HeaderMain = styled.View`
     background-color: ${({ theme }) => theme.COLOR.GRAY_100};
     margin-top: 22px;
-    width: 100%;
-
 `;
 
 export const ButtonMealView = styled.View`
@@ -29,7 +27,7 @@ export const LogoView = styled.View`
     height: 50px;
 `;
 
-export const SectionListView = styled.SafeAreaView`
+export const SectionListView = styled.View`
     flex: 1;
     margin-top: 32px;
 `;

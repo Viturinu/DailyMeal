@@ -1,9 +1,7 @@
 import styled, { css } from "styled-components/native";
 
-export type inDietType = "GREEN" | "RED";
-
 export type Props = {
-    Icon: inDietType;
+    Icon: boolean;
 }
 
 export const Container = styled.TouchableOpacity`
@@ -57,7 +55,7 @@ export const Description = styled.Text`
 `;
 
 export const IconView = styled.View<Props>`
-    background-color: ${({ theme, Icon }) => Icon === "GREEN" ? theme.COLOR.GREEN_MID : theme.COLOR.RED_MID}; 
+    background-color: ${({ theme, Icon }) => Icon === true ? theme.COLOR.GREEN_MID : theme.COLOR.RED_MID}; 
     border-radius: 8px;
     height: 14px;
     width: 14px;

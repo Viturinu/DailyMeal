@@ -4,9 +4,9 @@ import { TouchableOpacityProps } from "react-native";
 type Props = TouchableOpacityProps & {
     time: string,
     description: string,
-    inDiet?: inDietType,
+    inDiet?: boolean,
 }
-export function SectionListComponent({ time, description, inDiet = "GREEN", ...rest }: Props) {
+export function SectionListComponent({ time, description, inDiet = true, ...rest }: Props) {
     return (
         <Container {...rest}>
             <TimeDescriptionView>

@@ -5,10 +5,11 @@ type Props = TouchableOpacityProps & {
     time: string,
     description: string,
     inDiet?: boolean,
+    whatToDo: () => void
 }
-export function SectionListComponent({ time, description, inDiet = true, ...rest }: Props) {
+export function SectionListComponent({ time, description, inDiet = true, whatToDo, ...rest }: Props) {
     return (
-        <Container {...rest}>
+        <Container onPress={whatToDo} {...rest}>
             <TimeDescriptionView>
                 <TimeView>
                     <Time>{time}</Time>

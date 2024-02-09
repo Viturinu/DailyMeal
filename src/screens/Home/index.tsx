@@ -1,26 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import theme from "src/theme";
 import { ButtonMealView, Container, HeaderMain, LogoView, MealsText, SectionListView } from "./style";
 import { StatusBar, SectionList, View } from "react-native";
 import { PercentageCard } from "@components/PercentageCard";
 import { Logos } from "@components/Logos";
 import { SectionListComponent } from "@components/SectionListComponent";
-import { DateStamp } from "@components/SectionListComponent/style";
+import { DateStamp, Description } from "@components/SectionListComponent/style";
 import { Button } from "@components/Button";
 import { Plus } from "phosphor-react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { ObjetoOficial, getAllMeals } from "@storage/mealItem/getAllMeals";
 import { EmptyListComponent } from "@components/EmptyListComponent";
+import { generateObjectHash } from "@utils/hashGenerate";
+import { dietOnPercentage, statisticObject } from "@storage/mealItem/dietOnPercentage";
 
 export function Home() {
 
     const [mappedArrayDone, setMappedArrayDone] = useState<ObjetoOficial[]>([]);
+    const [percentageString, setPercentageString] = useState("");
 
     const navigation = useNavigation();
 
     function handleNewMeal() {
         navigation.navigate("form");
     }
+
+    async function handlePercentageCard() {
+        const object: statisticObject = await dietOnPercentage();
+        const percentage = ((object.mealInDiet / object.mealRegistered) * 100).toFixed(2);
+        setPercentageString(`${percentage}%`);
+    }
+
+    function handleClickListItem(name: string, description: string, time: string, dietIn: boolean) {
+        navigation.navigate("meal", { Title: name, Description: description, Time: time, dietIn: dietIn });
+    }
+
     //DATA TREATMENT
     async function fetchListData() {
         try {
@@ -33,9 +47,10 @@ export function Home() {
 
     }
 
-    useEffect(() => {
+    useFocusEffect(useCallback(() => {
         fetchListData();
-    }, []);
+        handlePercentageCard();
+    }, []));
 
     return (
         <>
@@ -50,7 +65,7 @@ export function Home() {
                 </LogoView>
 
                 <HeaderMain>
-                    <PercentageCard mensagem="das refeições dentro da dieta" number="97,10%" CardType="GREEN" ButtonOn={true} sizeNumber={32} />
+                    <PercentageCard mensagem="das refeições dentro da dieta" number={percentageString} CardType="GREEN" ButtonOn={true} sizeNumber={32} />
                 </HeaderMain>
                 <ButtonMealView>
                     <MealsText> Refeições</MealsText>
@@ -59,12 +74,13 @@ export function Home() {
                 <SectionListView>
                     <SectionList
                         sections={mappedArrayDone}
-                        keyExtractor={(item) => item.description}
+                        keyExtractor={(item) => generateObjectHash(item)}
                         renderItem={({ item }) => (
                             <SectionListComponent
                                 time={item.time}
                                 description={item.name + " - " + item.description}
                                 inDiet={item.dietIn}
+                                whatToDo={() => handleClickListItem(item.name, item.description, item.time, item.dietIn)}
                             />
                         )}
                         renderSectionHeader={({ section: { title } }) => (

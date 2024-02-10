@@ -9,14 +9,14 @@ import { DateStamp, Description } from "@components/SectionListComponent/style";
 import { Button } from "@components/Button";
 import { Plus } from "phosphor-react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { ObjetoOficial, getAllMeals } from "@storage/mealItem/getAllMeals";
 import { EmptyListComponent } from "@components/EmptyListComponent";
 import { generateObjectHash } from "@utils/hashGenerate";
 import { dietOnPercentage, statisticObject } from "@storage/mealItem/dietOnPercentage";
+import { ObjetoToDisplay, getAllMealsToDisplay } from "@storage/mealItem/getAllMealsToDisplay";
 
 export function Home() {
 
-    const [mappedArrayDone, setMappedArrayDone] = useState<ObjetoOficial[]>([]);
+    const [mappedArrayDone, setMappedArrayDone] = useState<ObjetoToDisplay[]>([]);
     const [percentageString, setPercentageString] = useState("");
 
     const navigation = useNavigation();
@@ -38,7 +38,7 @@ export function Home() {
     //DATA TREATMENT
     async function fetchListData() {
         try {
-            const meals = await getAllMeals(); //Retorna ARRAY com key e array de JSON (Objects) completo
+            const meals = await getAllMealsToDisplay(); //Retorna ARRAY com key e array de JSON (Objects) completo
             setMappedArrayDone(meals);
 
         } catch (error) {
@@ -90,8 +90,6 @@ export function Home() {
                         ListEmptyComponent={() => <EmptyListComponent />}
                     />
                 </SectionListView>
-
-
             </Container>
         </>
     )

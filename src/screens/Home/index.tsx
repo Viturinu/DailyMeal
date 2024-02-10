@@ -11,40 +11,69 @@ import { Plus } from "phosphor-react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { EmptyListComponent } from "@components/EmptyListComponent";
 import { generateObjectHash } from "@utils/hashGenerate";
-import { dietOnPercentage, statisticObject } from "@storage/mealItem/dietOnPercentage";
-import { ObjetoToDisplay, getAllMealsToDisplay } from "@storage/mealItem/getAllMealsToDisplay";
+import { getAllMeal } from "@storage/mealItem/getAllMeal";
+import { format } from "date-fns";
+import { dietOnInfos, statisticObject } from "@storage/mealItem/dietOnInfos";
+
+interface DisplayMeal {
+    name: string;
+    description: string;
+    date: string;
+    time: string;
+    dietIn: boolean;
+}
+interface DisplayObject {
+    title: string,
+    data: DisplayMeal[]
+}
 
 export function Home() {
 
-    const [mappedArrayDone, setMappedArrayDone] = useState<ObjetoToDisplay[]>([]);
+    const [mappedArrayDone, setMappedArrayDone] = useState<DisplayObject[]>([]);
     const [percentageString, setPercentageString] = useState("");
+    const [percentageState, setPercentageState] = useState<number>(0);
 
     const navigation = useNavigation();
 
     function handleNewMeal() {
-        navigation.navigate("form");
+        navigation.navigate("addMeal");
     }
 
     async function handlePercentageCard() {
-        const object: statisticObject = await dietOnPercentage();
-        const percentage = ((object.mealInDiet / object.mealRegistered) * 100).toFixed(2);
-        setPercentageString(`${percentage}%`);
+        const object: statisticObject = await dietOnInfos();
+        object.average === 0 ? setPercentageString("0%") : setPercentageString(`${(object.average).toFixed(2)}%`);
+        setPercentageState(object.average);
     }
 
-    function handleClickListItem(name: string, description: string, time: string, dietIn: boolean) {
-        navigation.navigate("meal", { Title: name, Description: description, Time: time, dietIn: dietIn });
+    function handleClickListItem(name: string, description: string, date: string, time: string, dietIn: boolean) {
+        navigation.navigate("meal", { title: name, description: description, date: date, time: time, dietIn: dietIn });
     }
 
     //DATA TREATMENT
     async function fetchListData() {
         try {
-            const meals = await getAllMealsToDisplay(); //Retorna ARRAY com key e array de JSON (Objects) completo
-            setMappedArrayDone(meals);
+            //Working on Data to display it in a list
+            const OficialObjectArray = await getAllMeal();
 
+            if (OficialObjectArray.length === 0) {
+                const mealsArray: DisplayObject[] = [];
+                setMappedArrayDone(mealsArray);
+            } else {
+                const mealsArray: DisplayObject[] = OficialObjectArray.map(({ title, data }) => ({ //convertendo para o padrão da lista - precisamos, como tudo no typescript, tipar e falar que é um array de objeto oficial, pra podermos setar o estado, também array ObjetoOficial, lá no screen
+                    title: title,
+                    data: data.map((objeto) => ({
+                        name: objeto.name,
+                        description: objeto.description,
+                        dietIn: objeto.dietIn,
+                        date: format(objeto.date, 'dd/MM/yyyy'),
+                        time: format(objeto.date, 'HH:mm')
+                    }))
+                }));
+                setMappedArrayDone(mealsArray);
+            }
         } catch (error) {
             console.log(error);
         }
-
     }
 
     useFocusEffect(useCallback(() => {
@@ -65,7 +94,7 @@ export function Home() {
                 </LogoView>
 
                 <HeaderMain>
-                    <PercentageCard mensagem="das refeições dentro da dieta" number={percentageString} CardType="GREEN" ButtonOn={true} sizeNumber={32} />
+                    <PercentageCard mensagem="das refeições dentro da dieta" number={percentageString} CardType={percentageState > 50 ? "GREEN" : "RED"} ButtonOn={true} sizeNumber={32} />
                 </HeaderMain>
                 <ButtonMealView>
                     <MealsText> Refeições</MealsText>
@@ -80,7 +109,7 @@ export function Home() {
                                 time={item.time}
                                 description={item.name + " - " + item.description}
                                 inDiet={item.dietIn}
-                                whatToDo={() => handleClickListItem(item.name, item.description, item.time, item.dietIn)}
+                                whatToDo={() => handleClickListItem(item.name, item.description, item.date, item.time, item.dietIn)}
                             />
                         )}
                         renderSectionHeader={({ section: { title } }) => (

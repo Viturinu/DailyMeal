@@ -26,7 +26,7 @@ export function HeaderHome({ headerTypeFlag = "GREEN", percentage, mensagem }: P
                 backgroundColor={headerTypeFlag === "GREEN" ? theme.COLOR.GREEN_MID : theme.COLOR.RED_MID}
                 translucent
             />
-            <Container viewType="GREEN">
+            <Container viewType={headerTypeFlag === "GREEN" ? "GREEN" : "RED"}>
                 <BackButtonView>
                     <BackButtonButton onPress={handleGoBack}>
                         <BackButtonIcon viewType="GREEN" />

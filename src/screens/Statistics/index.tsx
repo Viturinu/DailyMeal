@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { ContainerCards, BodySegment, BodyStatistics, Container, TitleText, TitleTextView } from "./style"
 import { HeaderHome } from "@components/HeaderHome"
 import { PercentageCard } from "@components/PercentageCard"
-import { dietOnPercentage, statisticObject } from "@storage/mealItem/dietOnPercentage";
+import { dietOnInfos, statisticObject } from "@storage/mealItem/dietOnInfos";
 
 export function Statistics() {
 
@@ -10,12 +10,14 @@ export function Statistics() {
         mealInDiet: 0,
         mealOutDiet: 0,
         mealRegistered: 0,
-        mealSequence: 0
+        mealSequence: 0,
+        average: 0
     });
 
     async function handleNumbersToStatistics() {
-        const object = await dietOnPercentage();
-        setObjectStatistics(object);
+        const object = await dietOnInfos();
+        if (object.mealRegistered === 0) return; //volta ao status inicial, tudo erado na definição das variaveis
+        else setObjectStatistics(object);;
     }
 
     useEffect(() => {
@@ -24,7 +26,7 @@ export function Statistics() {
 
     return (
         <Container>
-            <HeaderHome mensagem="das refeições dentro da dieta" percentage="33,36%" headerTypeFlag="GREEN" />
+            <HeaderHome mensagem="das refeições dentro da dieta" percentage={`${(objectStatistics.average.toFixed(2))} %`} headerTypeFlag={objectStatistics.average > 50 ? "GREEN" : "RED"} />
             <BodyStatistics>
                 <TitleTextView>
                     <TitleText>Estatísticas gerais</TitleText>

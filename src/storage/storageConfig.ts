@@ -1,8 +1,12 @@
-type MealDTO = {
+interface OficialMealDTO {
     name: string;
     description: string;
     date: Date;
     dietIn: boolean;
 }
+interface OficialObjectDTO {
+    title: string,
+    data: OficialMealDTO[]
+}
 
-export { MealDTO };
+export { OficialMealDTO, OficialObjectDTO };

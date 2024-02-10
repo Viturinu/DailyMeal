@@ -1,14 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MealDTO } from "@storage/storageConfig";
+import { OficialMealDTO } from "@storage/storageConfig";
 import { format } from 'date-fns';
 import { getMealByDate } from "./getMealsByDate";
 
-export async function addMealByDate({ name, description, date, dietIn }: MealDTO) {
+export async function addMealByDate({ name, description, date, dietIn }: OficialMealDTO) {
 
     const dataAtual = format(date, 'dd/MM/yyyy'); //pegando a data passada na inserção, no formulário
-    console.log(dataAtual)
 
-    const meal: MealDTO = {
+    const meal: OficialMealDTO = {
         name,
         description,
         date,

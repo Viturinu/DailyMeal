@@ -1,10 +1,11 @@
 import React from "react"
 import { Home } from "@screens/Home";
-import { Form } from "@screens/Form";
 import { MealDetails } from "@screens/MealDetails";
 import { Outcome } from "@screens/Outcome";
 import { Statistics } from "@screens/Statistics";
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { AddMeal } from "@screens/AddMeal";
+import { EditMeal } from "@screens/EditMeal";
 
 
 const { Navigator, Screen } = createNativeStackNavigator();
@@ -23,8 +24,8 @@ export function AppRoutes() {
             />
 
             <Screen
-                name="form"
-                component={Form}
+                name="addMeal"
+                component={AddMeal}
             />
 
             <Screen
@@ -39,6 +40,11 @@ export function AppRoutes() {
             <Screen
                 name="statistics"
                 component={Statistics}
+            />
+
+            <Screen
+                name="editMeal"
+                component={EditMeal}
             />
         </Navigator>
     )

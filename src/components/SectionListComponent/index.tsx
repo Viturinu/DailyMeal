@@ -1,4 +1,4 @@
-import { Container, Description, DescriptionView, IconView, Separator, SeparatorView, Time, TimeDescriptionView, TimeView, inDietType } from "./style";
+import { Container, Description, DescriptionView, IconView, Separator, SeparatorView, Time, TimeDescriptionView, TimeView } from "./style";
 import { TouchableOpacityProps } from "react-native";
 
 type Props = TouchableOpacityProps & {

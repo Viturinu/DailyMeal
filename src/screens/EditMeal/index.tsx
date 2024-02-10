@@ -1,21 +1,38 @@
 import React, { useState } from "react"
 import { Container, DateInputView, DatePressable, DateTimeInputView, DescriptionInputView, DietInOptionNao, DietInOptionSim, DietInOptionsView, DietInView, FormContainer, FormView, NomeInputView, TimeInputView } from "./style"
 import { Header } from "@components/Header"
-import { TitleText } from "@screens/Form/style"
+import { TitleText } from "@screens/AddMeal/style"
 import { Input } from "@components/Input"
 import { ButtonOption } from "@components/ButtonOption"
 import { Button } from "@components/Button"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { format } from 'date-fns';
-import { addMealByDate } from "@storage/mealItem/addMealByDate"
 import { Alert } from "react-native"
+import { editByDescriptionAndDate } from "@storage/mealItem/editByDescriptionAndDate"
 
-export function Form() {
+interface RouteParams {
+    nameRoute: string;
+    descriptionRoute: string;
+    dietDateRoute: string;
+    dietTimeRoute: string;
+    dietInRoute: boolean;
+}
 
-    const [dietIn, setDietIn] = useState<boolean>(true); //definição se está ou não setado
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
+export function EditMeal() {
+
+    const route = useRoute();
+    const navigation = useNavigation();
+
+    const { nameRoute } = route.params as RouteParams;
+    const { descriptionRoute } = route.params as RouteParams;
+    const { dietDateRoute } = route.params as RouteParams;
+    const { dietTimeRoute } = route.params as RouteParams;
+    const { dietInRoute } = route.params as RouteParams;
+
+    const [dietIn, setDietIn] = useState<boolean>(dietInRoute); //definição se está ou não setado
+    const [name, setName] = useState(nameRoute);
+    const [description, setDescription] = useState(descriptionRoute);
     const [date, setDate] = useState(new Date()); //data com hora e calendário
 
     const [clickDate, setClickDate] = useState(false); //status para forçar usuário a escolher a data
@@ -25,8 +42,8 @@ export function Form() {
     const [isLoading, setIsLoading] = useState(false);
 
 
-    const [dietDate, setDietDate] = useState<string>(""); //apenas para display no TextInput
-    const [dietTime, setDietTime] = useState<string>(""); //apenas para display no TextInput
+    const [dietDate, setDietDate] = useState<string>(dietDateRoute); //apenas para display no TextInput
+    const [dietTime, setDietTime] = useState<string>(dietTimeRoute); //apenas para display no TextInput
 
     const onChange = (event, selectedDate) => {
         setDate(selectedDate);
@@ -43,37 +60,15 @@ export function Form() {
         });
     };
 
-    function handleCreateNewMeal() {
+    async function handleEditMeal() {
         try {
             setIsLoading(true);
-            if (name.trim() === "") {
-                Alert.alert("Nome", "Favor digitar o nome da refeição");
-                setIsLoading(false);
-                return
-            }
-            if (description.trim() === "") {
-                Alert.alert("Descrição", "Favor digitar a descrição da refeição");
-                setIsLoading(false);
-                return
-            }
-            if (!clickDate) {
-                Alert.alert("Data", "Favor inserir a data da refeição");
-                setIsLoading(false);
-                return
-            }
-            if (!clickTime) {
-                Alert.alert("Horário", "Favor inserir o horário da refeição");
-                setIsLoading(false);
-                return
-            }
-            addMealByDate({ name, description, date, dietIn });
-            navigation.navigate("outcome", { type: dietIn });
+            await editByDescriptionAndDate(dietDateRoute, descriptionRoute, dietTimeRoute, name, description, date, dietIn);
+            navigation.navigate("home");
         } catch (error) {
             console.log(error);
         } //nao vou colocar finally pra evitar erros de estados por já ter saido da screen
     }
-
-    const navigation = useNavigation();
 
     return (
         <Container>
@@ -132,7 +127,7 @@ export function Form() {
                         </DietInOptionsView>
                     </DietInView>
                 </FormView>
-                <Button mensagem="Cadastrar refeição" buttonColor="BLACK" whatToDo={handleCreateNewMeal} iconActive={false} disabled={isLoading} />
+                <Button mensagem="Cadastrar refeição" buttonColor="BLACK" whatToDo={handleEditMeal} iconActive={false} disabled={isLoading} />
             </FormContainer>
         </Container>
     )

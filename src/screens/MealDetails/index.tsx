@@ -9,9 +9,10 @@ import { removeMealByDescriptionAndDate } from "@storage/mealItem/removeMeal"
 
 interface RouteParams {
     dietIn: boolean;
-    Title: string;
-    Description: string;
-    Time: string;
+    title: string;
+    description: string;
+    date: string;
+    time: string;
 }
 
 export function MealDetails() {
@@ -20,12 +21,23 @@ export function MealDetails() {
     const navigation = useNavigation();
 
     const { dietIn } = route.params as RouteParams;
-    const { Title } = route.params as RouteParams;
-    const { Description } = route.params as RouteParams;
-    const { Time } = route.params as RouteParams;
+    const { title } = route.params as RouteParams;
+    const { description } = route.params as RouteParams;
+    const { date } = route.params as RouteParams;
+    const { time } = route.params as RouteParams;
+
+    async function handleEdit() {
+        navigation.navigate("editMeal", {
+            nameRoute: title,
+            descriptionRoute: description,
+            dietDateRoute: date,
+            dietTimeRoute: time,
+            dietInRoute: dietIn
+        })
+    }
 
     async function handleRemove() {
-        removeMealByDescriptionAndDate(Description, Time);
+        await removeMealByDescriptionAndDate(date, description, time);
         navigation.goBack();
     }
 
@@ -39,13 +51,13 @@ export function MealDetails() {
             <MealContainerView>
                 <MealContainerContent>
                     <MealTextView>
-                        <MealTextTitle>{Title}</MealTextTitle>
-                        <MealTextDescription>{Description}</MealTextDescription>
+                        <MealTextTitle>{title}</MealTextTitle>
+                        <MealTextDescription>{description}</MealTextDescription>
                     </MealTextView>
 
                     <TimeTextView>
                         <TimeTextTitle> Data e hora</TimeTextTitle>
-                        <TimeTextDetails>{Time}</TimeTextDetails>
+                        <TimeTextDetails>{time}</TimeTextDetails>
                     </TimeTextView>
                     <MealStatusView>
                         {
@@ -55,7 +67,7 @@ export function MealDetails() {
 
                     </MealStatusView>
                 </MealContainerContent>
-                <Button buttonColor="BLACK" mensagem="Editar refeição" iconActive={true} Icone={PencilSimpleLine} whatToDo={() => null} />
+                <Button buttonColor="BLACK" mensagem="Editar refeição" iconActive={true} Icone={PencilSimpleLine} whatToDo={() => handleEdit()} />
                 <Button buttonColor="WHITE" mensagem="Excluir refeição" iconActive={true} Icone={Trash} whatToDo={() => handleRemove()} />
             </MealContainerView>
         </Container>

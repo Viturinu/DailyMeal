@@ -1,17 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { getAllMeal } from "./getAllMeal";
 import { format } from 'date-fns';
+import { getMealByDate } from "./getMealsByDate";
 
-export async function removeMealByDescriptionAndDate(descriptionParameter: string, timeParameter: string) {
-    const allMealsArray = await getAllMeal();
+export async function removeMealByDescriptionAndDate(dateParameter: string, descriptionParameter: string, timeParameter: string) {
+    const allMealsArray = await getMealByDate(dateParameter);
 
-    let allMealFiltered = null; // To create a new Array to insert
-    allMealsArray.forEach(({ title, data }) => {
-        allMealFiltered = data.filter(({ date, description }) => {
-            const data = format(date, 'HH:mm')
-            return !(description === descriptionParameter && data === timeParameter);
-        })
-        console.log(allMealFiltered)
-        AsyncStorage.setItem(title, JSON.stringify(allMealFiltered));
-    });
+    const newArray = allMealsArray.filter(({ description, date }) => {
+        return !(description === descriptionParameter && format(date, 'HH:mm') === timeParameter);
+    })
+
+    if (newArray.length === 0) AsyncStorage.removeItem(dateParameter);
+    else AsyncStorage.setItem(dateParameter, JSON.stringify(newArray));
 }
